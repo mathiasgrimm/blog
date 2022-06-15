@@ -246,4 +246,10 @@ If we wanted, we could have this Jumpbox, or another EC2 instance, forwarding th
 anywhere we wanted, including CloudWatch. We could send the logs to an ELK stack
 or anything really.
 
-by Mathias Grimm @ 15/06/2022 (https://twitter.com/matgrimm)
+
+## Thanks
+Thanks for checking out this article. If you have questions/suggestions you can [reach me
+on Twitter](https://twitter.com/matgrimm) or shoot me an email on mathiasgrimm@gmail.com
+
+
+*by Mathias Grimm @ 15/06/2022 (https://twitter.com/matgrimm)*
