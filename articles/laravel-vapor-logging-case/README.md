@@ -1,14 +1,14 @@
 # Laravel Vapor Logging Issues & Solutions
 
-I have been using Laravel Vapor for almost 2 years now and while It's awesome, it's also comes
+I have been using Laravel Vapor for almost 2 years now and while It's awesome, it also comes
 with some things you need to workaround or simple design it differently than you would normally.
 
 In this article, I would like to go through a very specific issues I had with Laravel Vapor and
-maybe be able to help someone else or even get input from other users in order to improve my proposed
+maybe be able to help someone else or get input from other users in order to improve my proposed
 solution.
 
 I had migrated one project entirely from conventional servers to Laravel Vapor, and due to 
-this very issue I am going to talk, I had to moved it back to the conventional server. 
+this very issue that I am going to talk, I had to moved it all back to the conventional servers. 
 
 And I am not talking about moving staging servers. In this specific case we run with Vapor in production 
 for about a week fixing things here and there until we hit a blocker issue that we could not solve. 
