@@ -3,8 +3,8 @@
 I have been using Laravel Vapor for almost 2 years now and while It's awesome, it also comes
 with some things you need to workaround or simple design it differently than you would normally.
 
-In this article, I would like to go through a very specific issues I had with Laravel Vapor and
-maybe be able to help someone else or get input from other users in order to improve my proposed
+In this article, I would like to go through a very specific issues I had with Laravel Vapor, and
+maybe be able to help someone else, or get input from other users in order to improve my proposed
 solution.
 
 I had migrated one project entirely from conventional servers to Laravel Vapor, and due to 
@@ -17,6 +17,7 @@ of any help.
 
 ## The Issue
 Vapor utilizes by default the `stderr` `LOG_CHANNEL`, which outputs all logs to the `php://stderr`.
+
 For some cases it works OK, however, if you are going to log a bit more, it's going to slow down a lot, 
 to the point the request will exceed the maximum allowed execution time of 30 seconds and nothing at all
 will be logged.
@@ -153,7 +154,7 @@ to me.
 I tried other log drives like `papertrail` which uses `UDP` and in all fairness I actually
 tried pretty much all options available in the `config/logging.php` file.
 
-None of the option really worked. 
+None of the options really worked well. 
 
 One option that worked a bit better was `papertrail` but still it failed at some point.
 I think I was able to log about 5000 entries with it before it timed out. 
