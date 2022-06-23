@@ -9,7 +9,7 @@ Laravel's default behavior is to keep it encrypted only in the database, and pla
 I think the default behaviour should be to always keep it encrypted unless you specifically ask for it decrypted.
 
 > For the rest of this reading assume the following:
-> - `production.encrypted-string` is an encrypted string, prepended with the environment
+> - `local.encrypted-string` is an encrypted string, prepended with the environment
 >   it was encrypted in.
 > - `plain-text-string` is just an unencrypted plain text string.
 
@@ -43,7 +43,7 @@ them.
 In addition to having the value encrypted, I would prepend the environment in which the string was encrypted in.
 
 ### New Api Examples
-I've thought the following API would more or less the one I'd like to work.
+I've thought the following API would be more or less the one I'd like to work.
 
 ```php
 // app/Models/Tenants.php
@@ -52,7 +52,7 @@ class Tenants extends Model
     protected $encrypted = [
         'access_token_github',
         'access_token_facebook',
-    ]
+    ];
 }
 
 // other.php
@@ -80,7 +80,7 @@ $tenant->access_token_github = 'plain-text-string';
 // -------------------------------------------------------------------
 // Example 3 - Getting The Decrypted Value
 // -------------------------------------------------------------------
-echo $tenant->access_token_github_descrypted;
+echo $tenant->access_token_github_decrypted;
 // Will print "plain-text-string".
 ```
 
@@ -100,7 +100,7 @@ echo $tenant->access_token_github_decrypted;
 
 ```php
 // -------------------------------------------------------------------
-// Example 5 - Update 
+// Example 5 - Update
 // -------------------------------------------------------------------
 $tenant->update([
     'access_token_github' => 'plain-text-string'
@@ -125,9 +125,9 @@ echo Tenant::where('access_token_github', 'local.encrypted-string')->count();
 // -------------------------------------------------------------------
 print_r($tenant->toArray());
 // Will print:
-array [
-    'access_token_github' => 'local.encrypted-string'
-]
+// array [
+//     'access_token_github' => 'local.encrypted-string'
+// ]
 ```
 
 ```php
