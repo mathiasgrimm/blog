@@ -299,3 +299,5 @@ trait WithEncryptedAttributes
 }
 
 ```
+
+https://github.com/mathiasgrimm/blog/blob/master/articles/laravel-encrypted-attributes-idea/
