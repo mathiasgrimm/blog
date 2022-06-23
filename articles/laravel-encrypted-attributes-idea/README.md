@@ -19,7 +19,7 @@ The examples bellow will all output the encrypted cast attributes in plain text:
 ```php
 logger($tenant, ['tenant' => $tenant]);
 // Will output:
-// [2022-06-23 12:10:32] local.DEBUG: {"access_token_github":"plain-text-string"} {"user":{"App\\Models\\Tenant":{"access_token_github":"plain-text-string"}}} 
+// [2022-06-23 12:10:32] local.DEBUG: {"access_token_github":"plain-text-string"} {"tenant":{"App\\Models\\Tenant":{"access_token_github":"plain-text-string"}}} 
 
 print_r($tenant->toArray());
 // Will print:
