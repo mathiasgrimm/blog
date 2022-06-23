@@ -110,6 +110,16 @@ $tenant->update([
 
 ```php
 // -------------------------------------------------------------------
+// Example 5.1 - Update With Raw
+// -------------------------------------------------------------------
+$tenant->update([
+    'access_token_github_raw' => 'local.encrypted-string'
+]);
+// Will store/set the value of access_token_github to "local.encrypted-string"
+```
+
+```php
+// -------------------------------------------------------------------
 // Example 6 - Query 
 // -------------------------------------------------------------------
 echo Tenant::where('access_token_github', 'plain-text-string')->count();
