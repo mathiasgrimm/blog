@@ -201,3 +201,91 @@ if (in_array($method, $writeMethods) && $this->access_token_github_environment !
     throw Exception("API is currently in read-only mode");
 }   
 ```
+
+## Temporary Trait
+For the time being, im using the following Trait, which implements what I am describing in this new API:
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Crypt;
+use InvalidArgumentException;
+
+trait WithEncryptedAttributes
+{
+    /**
+     * @param $value
+     * @return string
+     */
+    public function encryptAttribute($value)
+    {
+        $env = config('app.env');
+
+        return "{$env}." . Crypt::encryptString($value);
+    }
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public function decryptAttribute($value)
+    {
+        $env = config('app.env');
+        $value = str_replace("{$env}.", "", $value);
+
+        return Crypt::decryptString($value);
+    }
+
+    /**
+     * @param $key
+     * @return mixed|string
+     */
+    public function getAttribute($key)
+    {
+        $possibleKey = null;
+        if (str_ends_with($key, '_decrypted')) {
+            $possibleKey = substr($key, 0, -10);
+
+            if (in_array($possibleKey, $this->encrypted ?? [])) {
+                $key = $possibleKey;
+            }
+        }
+
+        $value = parent::getAttribute($key);
+
+        if ($value && $possibleKey) {
+            try {
+                $value = $this->decryptAttribute($value);
+            } catch (DecryptException $e) {
+                throw new InvalidArgumentException("can't decode attribute {$key}");
+            }
+        }
+
+        return $value;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     */
+    public function setAttribute($key, $value)
+    {
+        if (str_ends_with($key, '_raw')) {
+            $possibleKey = substr($key, 0, -4);
+
+            if (in_array($possibleKey, $this->encrypted ?? [])) {
+                $key = $possibleKey;
+            }
+        } elseif ($value && in_array($key, $this->encrypted ?? [])) {
+            $value = $this->encryptAttribute($value);
+        }
+
+        return parent::setAttribute($key, $value);
+    }
+}
+
+```
